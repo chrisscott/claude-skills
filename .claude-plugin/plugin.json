@@ -1,0 +1,9 @@
+{
+  "name": "claude-skills",
+  "version": "0.1.0",
+  "description": "A collection of Claude Code skills for app development workflows.",
+  "author": {
+    "name": "Chris Scott",
+    "url": "https://github.com/chrisscott"
+  }
+}
