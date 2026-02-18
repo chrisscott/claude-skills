@@ -1,40 +1,31 @@
 # Claude Skills
 
-A collection of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for app development workflows.
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin marketplace for app development workflows.
 
-## Available Skills
+## Available Plugins
 
-| Skill | Description |
-|-------|-------------|
-| [ios-app-builder](skills/ios-app-builder/) | Guides you through building an iOS app from scratch — planning, Liquid Glass UI, accessibility, testing, App Store submission |
+| Plugin | Description |
+|--------|-------------|
+| [ios-app-builder](plugins/ios-app-builder/) | Guides iOS app development from planning through App Store submission — Liquid Glass UI, accessibility, automated screenshots, and more |
 
 ## Installation
 
-### Option 1: Load directly (quickest)
-
-Clone the repo and pass it to Claude Code with `--plugin-dir`:
-
-```bash
-git clone https://github.com/chrisscott/claude-skills.git
-claude --plugin-dir ./claude-skills
-```
-
-Skills are available immediately. Claude will invoke them when relevant, or you can use them directly via `/claude-skills:ios-app-builder`.
-
-### Option 2: Add as a marketplace
-
-Inside a Claude Code session, add this repo as a plugin marketplace, then install from it:
+Add the marketplace and install plugins:
 
 ```
 /plugin marketplace add chrisscott/claude-skills
 /plugin install ios-app-builder@claude-skills
 ```
 
-See the [Claude Code plugins docs](https://code.claude.com/docs/en/discover-plugins) for more details.
+Or for local development:
 
-## What's Included
+```bash
+claude --plugin-dir ./plugins/ios-app-builder
+```
 
-### ios-app-builder
+See the [Claude Code plugin docs](https://code.claude.com/docs/en/discover-plugins) for more details.
+
+## ios-app-builder
 
 An end-to-end iOS development assistant that covers:
 

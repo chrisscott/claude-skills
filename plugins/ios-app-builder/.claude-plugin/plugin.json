@@ -1,0 +1,8 @@
+{
+  "name": "ios-app-builder",
+  "description": "Guides iOS app development from planning through App Store submission — Liquid Glass UI, accessibility, automated screenshots, and more.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Chris Scott"
+  }
+}

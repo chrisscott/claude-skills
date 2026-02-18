@@ -1,0 +1,19 @@
+{
+  "name": "claude-skills",
+  "owner": {
+    "name": "Chris Scott"
+  },
+  "metadata": {
+    "description": "Claude Code skills for app development workflows."
+  },
+  "plugins": [
+    {
+      "name": "ios-app-builder",
+      "source": "./plugins/ios-app-builder",
+      "description": "Guides iOS app development from planning through App Store submission — Liquid Glass UI, accessibility, automated screenshots, and more.",
+      "version": "1.0.0",
+      "category": "development",
+      "tags": ["ios", "swiftui", "xcode", "app-store", "liquid-glass", "accessibility"]
+    }
+  ]
+}

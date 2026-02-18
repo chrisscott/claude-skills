@@ -1,27 +1,34 @@
 # Claude Skills
 
-A collection of Claude Code skills (plugins) for app development workflows.
+A Claude Code plugin marketplace for app development workflows.
 
 ## Repository Structure
 
 ```
 claude-skills/
-├── .claude-plugin/          # Plugin metadata
-│   └── plugin.json
-└── skills/
-    └── <skill-name>/
-        ├── SKILL.md         # Skill definition (required)
-        ├── references/      # Reference docs the skill reads
-        └── scripts/         # Automation scripts
+├── .claude-plugin/
+│   ├── plugin.json          # Root plugin metadata
+│   └── marketplace.json     # Marketplace catalog
+└── plugins/
+    └── <plugin-name>/
+        ├── .claude-plugin/
+        │   └── plugin.json  # Plugin manifest
+        └── skills/
+            └── <skill-name>/
+                ├── SKILL.md         # Skill definition (required)
+                ├── references/      # Reference docs the skill reads
+                └── scripts/         # Automation scripts
 ```
 
 ## Conventions
 
-- Each skill lives in `skills/<skill-name>/SKILL.md`
+- Each plugin lives in `plugins/<plugin-name>/` with its own `.claude-plugin/plugin.json`
+- Skills within a plugin live in `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`
 - Skills use YAML frontmatter with `name`, `description`, and optionally `allowed-tools`
 - Reference materials go in `references/` — these are read by the skill at runtime
 - Scripts go in `scripts/` — must be executable
 - Keep SKILL.md focused on instructions; move detailed reference data to `references/`
+- Register every plugin in `.claude-plugin/marketplace.json`
 
 ## iOS Development Guidelines
 
