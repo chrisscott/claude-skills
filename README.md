@@ -10,13 +10,27 @@ A collection of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) sk
 
 ## Installation
 
-Install this plugin in Claude Code:
+### Option 1: Load directly (quickest)
+
+Clone the repo and pass it to Claude Code with `--plugin-dir`:
 
 ```bash
-claude plugin add --git https://github.com/chrisscott/claude-skills
+git clone https://github.com/chrisscott/claude-skills.git
+claude --plugin-dir ./claude-skills
 ```
 
-Once installed, the skills are automatically available. Claude will invoke them when relevant, or you can use them directly via `/ios-app-builder`.
+Skills are available immediately. Claude will invoke them when relevant, or you can use them directly via `/claude-skills:ios-app-builder`.
+
+### Option 2: Add as a marketplace
+
+Inside a Claude Code session, add this repo as a plugin marketplace, then install from it:
+
+```
+/plugin marketplace add chrisscott/claude-skills
+/plugin install ios-app-builder@claude-skills
+```
+
+See the [Claude Code plugins docs](https://code.claude.com/docs/en/discover-plugins) for more details.
 
 ## What's Included
 
