@@ -5,7 +5,7 @@ description: >
   create a SwiftUI interface, prepare for App Store submission, debug an Xcode
   project, or work on any iOS/iPadOS development task. Triggers: "iOS app",
   "iPhone app", "SwiftUI", "Xcode", "App Store", "build an app", "mobile app",
-  "submit to App Store", "TestFlight".
+  "submit to App Store", "TestFlight", "CloudKit".
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep, WebSearch, WebFetch, Task
 ---
 
