@@ -185,12 +185,40 @@ When the app needs sample data for development or testing:
 3. Use `#Preview` blocks with mock data for SwiftUI previews
 4. Use the same mocks in unit and UI tests
 
-### 2.4 External Actions Required
+### 2.4 CloudKit Schema Management
+
+See `references/cloudkit.md` for full details on environments, schema design, and the deploy process.
+
+**Critical facts to always communicate:**
+
+- Debug builds connect to the **development** CloudKit environment. App Store and external TestFlight builds connect to **production**. These environments are completely isolated — data and schema are never shared.
+- Schema changes in development take effect immediately. Production schema requires an explicit deploy and is **additive-only** — fields and record types can never be deleted from production.
+- **Schema must be deployed to production _before_ archiving the app for submission.** If users receive a build that references schema that doesn't yet exist in production, they get runtime errors.
+
+**Notify immediately when you write CloudKit schema changes:**
+
+Whenever you write code that introduces a new `CKRecord` type, adds a field to an existing record type, or adds a new index, immediately notify the user with an action item:
+
+> **CloudKit schema changed**: This code introduces [describe what changed — e.g., a new `Note` record type with `title` and `body` fields]. This exists in your **development** environment only right now. Before you submit an App Store update that includes this code, you must deploy the schema to production via [CloudKit Console](https://icloud.developer.apple.com) → your container → **Deploy Schema Changes to Production**. Add this to your pre-submission checklist.
+
+Do not wait until submission time to surface this. Flag it at the moment the schema changes.
+
+**Deploy sequence for any release that changes CloudKit schema:**
+1. Develop and test with debug builds (development environment)
+2. Deploy schema to production via [CloudKit Console](https://icloud.developer.apple.com) → your container → **Deploy Schema Changes to Production**
+3. Verify the new record types/fields appear in the Production schema view
+4. Then archive and upload to App Store Connect
+
+Always notify the user when a deploy is required:
+
+> **Action required**: Your app uses new CloudKit record types/fields. Before archiving for submission, deploy the schema to production in the CloudKit Console (https://icloud.developer.apple.com). Select your container → Schema → Deploy Schema Changes to Production. Verify the changes appear in the Production environment before building the archive.
+
+### 2.5 External Actions Required
 
 When implementing features that require actions outside of code:
 
 **Always notify the user** when they need to:
-- Deploy iCloud schema from development to production
+- Deploy CloudKit schema from development to production (see 2.4 above)
 - Configure push notification certificates or keys
 - Set up App Store Connect (app record, pricing, availability)
 - Configure in-app purchase products
@@ -310,9 +338,13 @@ When the user is ready to submit:
 3. Generate screenshots for all required device sizes
 4. Ensure the app icon is included in the asset catalog (1024x1024, no alpha)
 5. Verify the privacy manifest (`PrivacyInfo.xcprivacy`) is accurate
-6. Archive the app: `xcodebuild archive -scheme AppName ...`
-7. Walk the user through App Store Connect submission step by step
-8. Remind them about:
+6. **If the release changes any CloudKit schema** (new record types, fields, or indexes):
+   - Deploy schema to production via [CloudKit Console](https://icloud.developer.apple.com) → **Deploy Schema Changes to Production**
+   - Verify new types/fields appear in the Production schema view
+   - Only proceed to archive after confirming the deploy succeeded
+7. Archive the app: `xcodebuild archive -scheme AppName ...`
+8. Walk the user through App Store Connect submission step by step
+9. Remind them about:
    - Export compliance (encryption usage)
    - Content rights
    - Advertising identifier (IDFA) usage
